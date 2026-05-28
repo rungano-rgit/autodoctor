@@ -19,5 +19,16 @@
 }
 
 .btn-primary {
-  @apply bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold py-3 px-6 rounded-full shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+  background: linear-gradient(to right, #2563eb, #3b82f6);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 300ms;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-0.25rem);
 }
