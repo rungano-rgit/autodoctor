@@ -47,35 +47,56 @@ export default function GalleryPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">Our Work Gallery</h1>
-      <div className="bg-black rounded-xl overflow-hidden shadow-2xl min-h-96 md:min-h-[500px] flex items-center justify-center">
-        {images.length === 0 ? (
-          <div className="text-center py-12 text-white">Loading gallery...</div>
-        ) : (
-          mounted && (
-            <Slider {...settings}>
-              {images.map((img) => (
-                <div key={img.id} className="relative h-96 md:h-[500px]">
-                  <Image
-                    src={img.image_url}
-                    alt={img.title || 'Workshop photo'}
-                    fill
-                    className="object-cover w-full h-full"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 56rem"
-                    loading="lazy"
-                    quality={75}
-                  />
-                  {img.title && (
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-center">
-                      {img.title}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </Slider>
-          )
-        )}
+    <div className="max-w-5xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mb-10 text-center">
+        <p className="text-sm uppercase tracking-[0.36em] text-sky-600 font-semibold mb-3">Gallery</p>
+        <h1 className="text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">Our Work Gallery</h1>
+        <p className="mt-4 max-w-2xl mx-auto text-slate-600">Browse recent repair and diagnostic work to see the quality and care we bring to every vehicle.</p>
+      </div>
+
+      <div className="overflow-hidden rounded-[32px] border border-slate-200 shadow-2xl bg-white">
+        <div className="border-b border-slate-200 bg-slate-950 px-6 py-5">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-sm uppercase tracking-[0.24em] text-sky-400 font-semibold">Work showcase</p>
+              <p className="mt-1 text-slate-300">A curated selection of jobs completed by Auto Doctor.</p>
+            </div>
+            <div className="rounded-full bg-slate-800 px-4 py-2 text-sm text-slate-200">Swipe or click through the gallery</div>
+          </div>
+        </div>
+
+        <div className="bg-slate-950 min-h-[540px] flex items-center justify-center">
+          {images.length === 0 ? (
+            <div className="animate-pulse rounded-[28px] bg-slate-900 p-10 text-center shadow-xl shadow-slate-950/30">
+              <div className="mx-auto mb-6 h-8 w-48 rounded-full bg-slate-700"></div>
+              <div className="mx-auto mb-3 h-4 w-72 rounded-full bg-slate-700"></div>
+              <div className="mx-auto h-4 w-56 rounded-full bg-slate-700"></div>
+            </div>
+          ) : (
+            mounted && (
+              <Slider {...settings}>
+                {images.map((img) => (
+                  <div key={img.id} className="relative h-[420px] sm:h-[520px] md:h-[560px]">
+                    <Image
+                      src={img.image_url}
+                      alt={img.title || 'Workshop photo'}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 56rem"
+                      loading="lazy"
+                      quality={75}
+                    />
+                    {img.title && (
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/90 to-transparent px-5 py-4 text-center text-sm font-medium text-white">
+                        {img.title}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </Slider>
+            )
+          )}
+        </div>
       </div>
     </div>
   )
