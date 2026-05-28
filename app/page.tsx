@@ -32,7 +32,7 @@ export default async function Home() {
     <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">Mileage Masters t/a Auto Doctor</h1>
     <p className="text-xl md:text-2xl mt-4 text-blue-100">Your car's health, our priority</p>
     <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-      <a href="https://wa.me/263776327772" className="btn-primary inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-2xl">
+      <a href="https://wa.me/263776327772" className="btn-primary hero-cta inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-2xl">
         <FaWhatsapp size={22} /> WhatsApp Us
       </a>
       <a href="tel:+263776327772" className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
