@@ -32,11 +32,11 @@ export default async function Home() {
     <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">Mileage Masters t/a Auto Doctor</h1>
     <p className="text-xl md:text-2xl mt-4 text-blue-100">Your car's health, our priority</p>
     <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-      <a href="https://wa.me/263776327772" className="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-        <FaWhatsapp size={24} /> WhatsApp Us
+      <a href="https://wa.me/263776327772" className="btn-primary inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-2xl">
+        <FaWhatsapp size={22} /> WhatsApp Us
       </a>
-      <a href="tel:+263776327772" className="inline-flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-900 px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-        <FaPhone size={24} /> Call Now
+      <a href="tel:+263776327772" className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+        <FaPhone size={22} /> Call Now
       </a>
     </div>
   </div>
@@ -49,13 +49,17 @@ export default async function Home() {
     <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Professional diagnostics, repairs, and maintenance for all makes and models</p>
     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
       {services?.map((service) => (
-        <div key={service.id} className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-gray-100">
-          <div className="h-2 w-full bg-gradient-to-r from-blue-500 to-blue-600"></div>
-          <div className="p-6">
+        <div key={service.id} className="group bg-white rounded-[28px] shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-slate-200 min-h-[280px]">
+          <div className="h-2 w-full bg-gradient-to-r from-sky-500 to-cyan-500"></div>
+          <div className="p-6 flex flex-col h-full">
             <div className="mb-4">{iconMap[service.icon as keyof typeof iconMap] || iconMap.default}</div>
-            <h3 className="text-xl font-bold mb-2">{service.name}</h3>
-            <p className="text-gray-600 leading-relaxed">{service.description?.substring(0, 100)}...</p>
-            <Link href={`/services/${service.slug}`} className="inline-flex items-center mt-4 text-blue-600 font-semibold group-hover:translate-x-1 transition-transform">Learn more →</Link>
+            <div className="flex-1">
+              <h3 className="text-xl font-semibold mb-3">{service.name}</h3>
+              <p className="text-slate-600 leading-relaxed">{service.description?.substring(0, 110)}...</p>
+            </div>
+            <Link href={`/services/${service.slug}`} className="inline-flex items-center gap-2 mt-6 text-sky-600 font-semibold group-hover:text-sky-700 transition">
+              Learn more →
+            </Link>
           </div>
         </div>
       ))}
