@@ -61,10 +61,10 @@ export default function GalleryPage() {
                     src={img.image_url}
                     alt={img.title || 'Workshop photo'}
                     fill
-                    className="object-contain"
+                    className="object-cover w-full h-full"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 56rem"
                     loading="lazy"
-                    quality={85}
+                    quality={75}
                   />
                   {img.title && (
                     <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-center">

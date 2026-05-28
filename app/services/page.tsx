@@ -22,7 +22,12 @@ export default async function ServicesListPage() {
       <h1 className="text-3xl font-bold mb-6">Our Services</h1>
       <div className="grid md:grid-cols-2 gap-6">
         {services?.map((service) => (
-          <Link key={service.id} href={`/services/${service.slug}`} className="block bg-white rounded-lg shadow hover:shadow-lg transition p-6">
+          <Link
+            key={service.id}
+            href={`/services/${encodeURIComponent(String(service.slug).trim())}`}
+            className="block bg-white rounded-lg shadow hover:shadow-lg transition p-6"
+            aria-label={`Read more about ${service.name}`}
+          >
             <div className="mb-3">{iconMap[service.icon as keyof typeof iconMap] || iconMap.default}</div>
             <h2 className="text-xl font-semibold">{service.name}</h2>
             <p className="text-gray-600 mt-2">{service.description?.substring(0, 120)}...</p>
