@@ -16,44 +16,81 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     { href: '/contact', label: 'Contact', icon: <FaEnvelope /> },
   ]
 
-  const tabClasses = (href: string) => {
-    const active = href === '/services'
-      ? pathname === '/services' || pathname.startsWith('/services/')
-      : pathname === href
-    return `inline-flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-full transition duration-200 ${active ? 'text-white border-b-4 border-emerald-400 bg-white/5' : 'text-slate-200 border-b-4 border-transparent hover:text-cyan-200 hover:border-blue-400'}`
+  const isActive = (href: string) => {
+    if (href === '/services') return pathname === '/services' || pathname.startsWith('/services/')
+    return pathname === href
   }
 
   return (
     <html lang="en">
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
-      <body className="bg-slate-50 text-slate-900 antialiased" suppressHydrationWarning>
+      <body className="bg-white text-slate-800 antialiased" suppressHydrationWarning>
         <div className="flex flex-col min-h-screen">
-          <nav className="sticky top-0 z-50 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 text-slate-100 shadow-2xl border-b border-slate-800">
+          {/* Sticky Navbar with Glassmorphism */}
+          <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg shadow-md border-b border-slate-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex justify-between items-center h-16">
-                <Link href="/" className="flex items-center gap-3">
-                  <img src="/logo-emblem.svg" alt="Auto Doctor emblem" className="brand-emblem h-10 w-10 md:h-12 md:w-12" />
-                  <span className="brand-text text-xl md:text-2xl font-extrabold">Auto Doctor</span>
+              <div className="flex justify-between items-center h-16 md:h-20">
+                {/* Logo + Brand */}
+                <Link href="/" className="flex items-center gap-3 group">
+                  <img
+                    src="/mmad-logo.jpeg"
+                    alt="MMAD Auto Doctor"
+                    className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover shadow-sm transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="flex flex-col leading-tight">
+                    <span className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-navy via-royal to-purple bg-clip-text text-transparent">
+                      Auto Doctor
+                    </span>
+                    <span className="text-[11px] md:text-xs font-medium text-gold tracking-wide">MMAD • Your Car's Health, Our Priority</span>
+                  </div>
                 </Link>
-                <div className="hidden md:flex items-center gap-3">
+
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center gap-2 lg:gap-4">
                   {navLinks.map(({ href, label, icon }) => (
-                    <Link key={href} href={href} className={tabClasses(href)}>
-                      {icon}
-                      {label}
+                    <Link
+                      key={href}
+                      href={href}
+                      className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                        isActive(href)
+                          ? 'bg-gradient-to-r from-navy to-royal text-white shadow-md'
+                          : 'text-slate-700 hover:bg-slate-100 hover:text-royal'
+                      }`}
+                    >
+                      <span className="flex items-center gap-2">
+                        {icon}
+                        {label}
+                      </span>
                     </Link>
                   ))}
                 </div>
-                <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-slate-100 hover:text-cyan-200 transition duration-200 p-2 rounded-lg">
+
+                {/* Mobile Menu Button */}
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition"
+                >
                   {mobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
                 </button>
               </div>
+
+              {/* Mobile Dropdown */}
               {mobileMenuOpen && (
-                <div className="md:hidden py-4 border-t border-slate-800 bg-slate-950">
-                  <div className="flex flex-col space-y-3 text-slate-100">
+                <div className="md:hidden py-4 border-t border-slate-200 bg-white/95 backdrop-blur-sm">
+                  <div className="flex flex-col space-y-2">
                     {navLinks.map(({ href, label, icon }) => (
-                      <Link key={href} href={href} onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 hover:text-cyan-200">
+                      <Link
+                        key={href}
+                        href={href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition ${
+                          isActive(href)
+                            ? 'bg-gradient-to-r from-navy to-royal text-white'
+                            : 'text-slate-700 hover:bg-slate-50 hover:text-royal'
+                        }`}
+                      >
                         {icon}
                         {label}
                       </Link>
@@ -63,17 +100,53 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               )}
             </div>
           </nav>
+
           <main className="flex-grow">{children}</main>
-          <footer className="bg-[#0b2545] text-slate-200 py-12 mt-auto">
+
+          {/* Professional Footer */}
+          <footer className="bg-navy text-slate-200 py-12 mt-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid md:grid-cols-3 gap-8">
-                <div><h3 className="text-2xl font-bold text-white mb-4">Auto Doctor</h3><p className="max-w-sm text-slate-300">Your trusted auto repair specialist in Harare, delivering fast diagnostics and dependable repairs.</p></div>
-                <div><h4 className="text-white font-semibold mb-4">Quick Links</h4><ul className="space-y-3 text-slate-300"><li><Link href="/" className="hover:text-white transition">Home</Link></li><li><Link href="/services" className="hover:text-white transition">Services</Link></li><li><Link href="/gallery" className="hover:text-white transition">Gallery</Link></li><li><Link href="/contact" className="hover:text-white transition">Contact</Link></li></ul></div>
-                <div><h4 className="text-white font-semibold mb-4">Contact</h4><p className="text-slate-300"><FaWhatsapp className="inline mr-2 text-emerald-400" /> <a href="https://wa.me/263776327772" className="hover:text-white">077 632 7772</a></p><p className="text-slate-300"><FaPhone className="inline mr-2 text-slate-200" /> <a href="tel:+263776327772" className="hover:text-white">077 632 7772</a></p><p className="mt-4 text-sm text-slate-400">© {new Date().getFullYear()} Auto Doctor. All rights reserved.</p></div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <img src="/mmad-logo.jpeg" alt="MMAD" className="h-12 w-12 rounded-full object-cover" />
+                    <span className="text-2xl font-bold text-gold">Auto Doctor</span>
+                  </div>
+                  <p className="text-slate-300 leading-relaxed">
+                    Your trusted auto repair specialist in Harare. Fast diagnostics, quality repairs, transparent pricing.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold text-lg mb-4">Quick Links</h4>
+                  <ul className="space-y-2">
+                    <li><Link href="/" className="hover:text-gold transition">Home</Link></li>
+                    <li><Link href="/services" className="hover:text-gold transition">Services</Link></li>
+                    <li><Link href="/gallery" className="hover:text-gold transition">Gallery</Link></li>
+                    <li><Link href="/contact" className="hover:text-gold transition">Contact</Link></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold text-lg mb-4">Contact</h4>
+                  <p className="flex items-center gap-2 mb-2">
+                    <FaWhatsapp className="text-emerald-400" />
+                    <a href="https://wa.me/263777632772" className="hover:text-gold transition">077 632 7772</a>
+                  </p>
+                  <p className="flex items-center gap-2 mb-4">
+                    <FaPhone className="text-slate-300" />
+                    <a href="tel:+263777632772" className="hover:text-gold transition">077 632 7772</a>
+                  </p>
+                  <p className="text-sm text-slate-400">© {new Date().getFullYear()} Auto Doctor. All rights reserved.</p>
+                </div>
               </div>
             </div>
           </footer>
-          <a href="https://wa.me/263776327772" aria-label="Contact us on WhatsApp" className="whatsapp-fab">
+
+          {/* Floating WhatsApp Button (FAB) */}
+          <a
+            href="https://wa.me/263777632772"
+            className="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-xl hover:bg-green-600 transition-all duration-300 hover:scale-110 hover:shadow-2xl"
+            aria-label="Chat on WhatsApp"
+          >
             <FaWhatsapp size={24} />
           </a>
         </div>
