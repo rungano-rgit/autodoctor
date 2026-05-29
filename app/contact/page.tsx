@@ -1,157 +1,149 @@
 'use client'
 import { useState } from 'react'
-import { FaWhatsapp, FaPhone, FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa'
+import { FaWhatsapp, FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperclip } from 'react-icons/fa'
 
 export default function ContactPage() {
   const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
   const [carModel, setCarModel] = useState('')
   const [problem, setProblem] = useState('')
+  const [attachment, setAttachment] = useState<File | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const message = `Name: ${encodeURIComponent(name)}%0ACar: ${encodeURIComponent(carModel)}%0AProblem: ${encodeURIComponent(problem)}`
+  const handleWhatsApp = () => {
+    let message = `Name: ${name}%0AEmail: ${email}%0ACar: ${carModel}%0AProblem: ${problem}`
+    if (attachment) {
+      message += `%0AAttachment: ${attachment.name} (send manually)`
+    }
     window.open(`https://wa.me/263776327772?text=${message}`, '_blank')
   }
 
+  const handleEmail = () => {
+    const subject = `Auto Doctor inquiry from ${name}`
+    let body = `Name: ${name}%0AEmail: ${email}%0ACar Model: ${carModel}%0AProblem: ${problem}`
+    if (attachment) {
+      body += `%0A%0APlease find attached: ${attachment.name} (please attach manually)`
+    }
+    window.location.href = `mailto:info@autodoctor.co.zw?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  }
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
-      <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/80 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl">
-        <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-purple-950 px-8 py-10">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-amber-300">
-            Contact Us
-          </h1>
-          <p className="mt-3 max-w-2xl text-sm text-slate-300 md:text-base">
-            Send a message, request service, or find our Harare workshop. Our team is ready to help
-            you get back on the road quickly and safely.
-          </p>
-        </div>
+    <div className="max-w-7xl mx-auto px-4 py-12">
+      <h1 className="text-3xl md:text-4xl font-bold text-center mb-4 bg-gradient-to-r from-navy via-royal to-purple bg-clip-text text-transparent">
+        Contact Us
+      </h1>
+      <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        Reach out for a free quote or consultation. We'll respond promptly.
+      </p>
 
-        <div className="grid gap-8 md:grid-cols-[1.05fr_0.95fr] px-8 py-10">
-          <div className="space-y-8">
-            <div className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 shadow-xl shadow-slate-950/20">
-              <div className="space-y-4">
-                <div className="flex items-start gap-4 rounded-3xl border border-amber-300/20 bg-slate-950/75 p-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-amber-300 to-orange-500 text-slate-950">
-                    <FaWhatsapp />
-                  </div>
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-slate-400">WhatsApp</p>
-                    <a href="https://wa.me/263776327772" className="mt-1 block text-lg font-semibold text-slate-100 hover:text-amber-300">
-                      077 632 7772
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 rounded-3xl border border-slate-700/80 bg-slate-950/70 p-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-slate-800 text-sky-400">
-                    <FaPhone />
-                  </div>
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Phone</p>
-                    <a href="tel:+263776327772" className="mt-1 block text-lg font-semibold text-slate-100 hover:text-sky-300">
-                      077 632 7772
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 rounded-3xl border border-slate-700/80 bg-slate-950/70 p-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-slate-800 text-red-400">
-                    <FaMapMarkerAlt />
-                  </div>
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Location</p>
-                    <p className="mt-1 text-lg font-semibold text-slate-100">
-                      Harare, Zimbabwe
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 rounded-3xl border border-slate-700/80 bg-slate-950/70 p-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-slate-800 text-emerald-300">
-                    <FaEnvelope />
-                  </div>
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Email</p>
-                    <a href="mailto:info@autodoctor.co.zw" className="mt-1 block text-lg font-semibold text-slate-100 hover:text-emerald-300">
-                      info@autodoctor.co.zw
-                    </a>
-                  </div>
-                </div>
+      <div className="grid md:grid-cols-2 gap-8">
+        {/* Left Column - Company Details */}
+        <div className="bg-white rounded-xl border border-gray-100 p-8 shadow-sm">
+          <h2 className="text-2xl font-bold text-navy mb-6">Auto Doctor</h2>
+          <div className="space-y-6">
+            <div className="flex items-start gap-4">
+              <FaMapMarkerAlt className="text-royal text-xl mt-1" />
+              <div>
+                <h3 className="font-semibold text-gray-800">Workshop Location</h3>
+                <p className="text-gray-600">Harare, Zimbabwe<br />Opposite Showgrounds, Samora Machel Ave</p>
               </div>
             </div>
-
-            <div className="rounded-[1.75rem] border border-white/10 bg-slate-900/95 p-6 shadow-xl shadow-slate-950/20">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <label className="block">
-                    <span className="text-sm font-semibold uppercase tracking-[0.15em] text-slate-400">
-                      Your Name
-                    </span>
-                    <input
-                      type="text"
-                      placeholder="John Doe"
-                      value={name}
-                      onChange={e => setName(e.target.value)}
-                      className="mt-3 w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300/30"
-                      required
-                    />
-                  </label>
-
-                  <label className="block">
-                    <span className="text-sm font-semibold uppercase tracking-[0.15em] text-slate-400">
-                      Car Model & Year
-                    </span>
-                    <input
-                      type="text"
-                      placeholder="Toyota Premio 2018"
-                      value={carModel}
-                      onChange={e => setCarModel(e.target.value)}
-                      className="mt-3 w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300/30"
-                    />
-                  </label>
-                </div>
-
-                <label className="block">
-                  <span className="text-sm font-semibold uppercase tracking-[0.15em] text-slate-400">
-                    Describe the problem
-                  </span>
-                  <textarea
-                    placeholder="Briefly explain the issue"
-                    rows={5}
-                    value={problem}
-                    onChange={e => setProblem(e.target.value)}
-                    className="mt-3 w-full rounded-[1.25rem] border border-white/10 bg-slate-950/80 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-300/30"
-                    required
-                  />
-                </label>
-
-                <button
-                  type="submit"
-                  className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-amber-300 via-yellow-300 to-violet-500 px-6 py-3 text-sm font-semibold text-slate-950 transition duration-300 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-amber-300/20"
-                >
-                  <FaWhatsapp className="h-5 w-5" />
-                  Send via WhatsApp
-                </button>
-              </form>
+            <div className="flex items-start gap-4">
+              <FaPhone className="text-royal text-xl mt-1" />
+              <div>
+                <h3 className="font-semibold text-gray-800">Call / WhatsApp</h3>
+                <p className="text-gray-600"><a href="tel:+263777632772" className="hover:text-royal">077 632 7772</a></p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <FaEnvelope className="text-royal text-xl mt-1" />
+              <div>
+                <h3 className="font-semibold text-gray-800">Email</h3>
+                <p className="text-gray-600">info@autodoctor.co.zw</p>
+              </div>
             </div>
           </div>
-
-          <div className="rounded-[1.75rem] border border-white/10 bg-slate-900/90 p-6 shadow-xl shadow-slate-950/20">
-            <div className="overflow-hidden rounded-[1.5rem] border border-white/10">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345!2d31.0335!3d-17.8252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931a1e0c0c0c0c0%3A0x1234567890abcdef!2sHarare!5e0!3m2!1sen!2szw!4v1234567890"
-                width="100%"
-                height="360"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                className="h-full w-full bg-slate-950"
-              />
-            </div>
-            <p className="mt-5 text-sm text-slate-400">
-              OUR LOCATION. Drop by our Harare workshop for a fast, reliable inspection and service.
+          <div className="mt-8 pt-6 border-t border-gray-100">
+            <p className="text-sm text-gray-500">
+              * For urgent inquiries, please WhatsApp or call directly.
             </p>
           </div>
+        </div>
+
+        {/* Right Column - Contact Form */}
+        <div className="bg-white rounded-xl border border-gray-100 p-8 shadow-sm">
+          <h2 className="text-xl font-semibold text-navy mb-6">Request a Quote</h2>
+          <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal focus:border-transparent transition"
+                placeholder="John Doe"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal focus:border-transparent transition"
+                placeholder="john@example.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Car Model & Year</label>
+              <input
+                type="text"
+                value={carModel}
+                onChange={(e) => setCarModel(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal focus:border-transparent transition"
+                placeholder="Toyota Hilux 2020"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Describe the problem *</label>
+              <textarea
+                value={problem}
+                onChange={(e) => setProblem(e.target.value)}
+                required
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal focus:border-transparent transition"
+                placeholder="What's wrong? Any symptoms?"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                <FaPaperclip className="inline mr-1 text-gray-500" /> Attachment (photo/document)
+              </label>
+              <input
+                type="file"
+                onChange={(e) => setAttachment(e.target.files?.[0] || null)}
+                className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-royal/10 file:text-royal hover:file:bg-royal/20"
+              />
+              <p className="text-xs text-gray-400 mt-1">Max 10MB. Will be sent as a link or manually attached.</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 pt-4">
+              <button
+                type="button"
+                onClick={handleWhatsApp}
+                className="flex items-center justify-center gap-2 bg-green-500 text-white font-semibold py-3 px-4 rounded-lg hover:bg-green-600 transition shadow-sm"
+              >
+                <FaWhatsapp size={18} /> Send via WhatsApp
+              </button>
+              <button
+                type="button"
+                onClick={handleEmail}
+                className="flex items-center justify-center gap-2 bg-royal text-white font-semibold py-3 px-4 rounded-lg hover:bg-cyan-600 transition shadow-sm"
+              >
+                <FaEnvelope size={18} /> Send via Email
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
