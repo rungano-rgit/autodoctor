@@ -26,17 +26,18 @@ export default async function Home() {
 
   return (
     <div>
-      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white overflow-hidden">
-  <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-  <div className="relative max-w-7xl mx-auto px-4 py-24 md:py-32 text-center">
+      <section className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white overflow-hidden">
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.18),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(52,211,153,0.16),_transparent_25%)] pointer-events-none"></div>
+  <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10"></div>
+  <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28 text-center">
     <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">Mileage Masters t/a Auto Doctor</h1>
-    <p className="text-xl md:text-2xl mt-4 text-blue-100">Your car's health, our priority</p>
-    <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-      <a href="https://wa.me/263776327772" className="btn-primary hero-cta inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-2xl">
-        <FaWhatsapp size={22} /> WhatsApp Us
+    <p className="text-xl md:text-2xl mt-4 text-slate-200">Your car's health, our priority</p>
+    <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+      <a href="https://wa.me/263776327772" className="btn-primary hero-cta inline-flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-3 md:px-4 md:py-2 shadow-lg hover:shadow-2xl rounded-full min-w-[170px]">
+        <FaWhatsapp size={20} /> WhatsApp Us
       </a>
-      <a href="tel:+263776327772" className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-        <FaPhone size={22} /> Call Now
+      <a href="tel:+263776327772" className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-4 py-3 md:px-4 md:py-2 rounded-full text-sm sm:text-base font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 min-w-[170px]">
+        <FaPhone size={20} /> Call Now
       </a>
     </div>
   </div>
@@ -57,7 +58,7 @@ export default async function Home() {
               <h3 className="text-xl font-semibold mb-3">{service.name}</h3>
               <p className="text-slate-600 leading-relaxed">{service.description?.substring(0, 110)}...</p>
             </div>
-            <Link href={`/services/${service.slug}`} className="inline-flex items-center gap-2 mt-6 text-[var(--brand-blue)] font-semibold hover:text-[var(--brand-cyan)] transition">
+            <Link href={`/services/${encodeURIComponent(String(service.slug || '').trim())}`} className="inline-flex items-center gap-2 mt-6 text-[var(--brand-blue)] font-semibold hover:text-[var(--brand-cyan)] transition">
               Learn more →
             </Link>
           </div>
