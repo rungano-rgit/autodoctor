@@ -53,7 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </div>
           </footer>
-          <a href="https://wa.me/263776327772" className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-all z-50 hover:scale-110"><FaWhatsapp size={24} /></a>
+          <a href="https://wa.me/263776327772" aria-label="Contact us on WhatsApp" className="whatsapp-fab">
+            <FaWhatsapp size={24} />
+          </a>
         </div>
       </body>
     </html>
