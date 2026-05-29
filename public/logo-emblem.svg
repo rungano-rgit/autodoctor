@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Auto Doctor emblem">
+  <defs>
+    <linearGradient id="g" x1="0%" x2="100%">
+      <stop offset="0%" stop-color="#e6b01e"/>
+      <stop offset="45%" stop-color="#2563eb"/>
+      <stop offset="75%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="36" fill="url(#g)" />
+  <g transform="translate(20,24) scale(0.9)" fill="#fff">
+    <!-- stylized A with wrench silhouette (simplified) -->
+    <path d="M60 20 L90 120 L120 20 L105 20 L90 76 L75 20 Z" />
+    <path d="M140 30 L160 50 L145 65 L125 45 Z" />
+  </g>
+</svg>
