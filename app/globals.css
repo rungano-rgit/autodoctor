@@ -1,7 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+/* --------------------------------------------------------------
+   Custom Color Palette (Tailwind v4 @theme)
+---------------------------------------------------------------- */
+@theme {
+  --color-navy: #0b2545;
+  --color-gold: #e6b01e;
+  --color-royal: #4169e1;
+  --color-purple: #7c3aed;
+  --color-cyan: #06b6d4;
+}
+
+/* --------------------------------------------------------------
+   Base Styles
+---------------------------------------------------------------- */
 @layer base {
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -17,12 +29,15 @@
   }
 
   *:focus-visible {
-    outline: 2px solid #4169e1;
+    outline: 2px solid var(--color-royal);
     outline-offset: 2px;
     border-radius: 0.25rem;
   }
 }
 
+/* --------------------------------------------------------------
+   Component Classes
+---------------------------------------------------------------- */
 @layer components {
   .btn-primary {
     @apply bg-gradient-to-r from-royal to-cyan text-white font-semibold py-3 px-6 rounded-full shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
@@ -47,16 +62,21 @@
   }
 }
 
+/* --------------------------------------------------------------
+   Animations
+---------------------------------------------------------------- */
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
 }
-
 .hover-float:hover {
   animation: float 0.4s ease-in-out;
 }
 
+/* --------------------------------------------------------------
+   Brand & Logo
+---------------------------------------------------------------- */
 .brand-emblem {
   border-radius: 9999px;
   transition: transform 0.2s ease;
@@ -65,12 +85,15 @@
   transform: scale(1.05);
 }
 .brand-text {
-  background: linear-gradient(135deg, #e6b01e, #4169e1, #06b6d4);
+  background: linear-gradient(135deg, var(--color-gold), var(--color-royal), var(--color-cyan));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
+/* --------------------------------------------------------------
+   Hero Button Constraint
+---------------------------------------------------------------- */
 .hero-cta {
   display: inline-flex !important;
   width: auto !important;
@@ -79,6 +102,9 @@
   align-items: center;
 }
 
+/* --------------------------------------------------------------
+   Responsive Overrides
+---------------------------------------------------------------- */
 @media (max-width: 640px) {
   .section-title {
     font-size: 1.875rem;
@@ -92,6 +118,9 @@
   }
 }
 
+/* --------------------------------------------------------------
+   Custom Scrollbar
+---------------------------------------------------------------- */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -100,9 +129,9 @@
   background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #4169e1;
+  background: var(--color-royal);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #7c3aed;
+  background: var(--color-purple);
 }
