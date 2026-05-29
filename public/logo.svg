@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 200" role="img" aria-label="Auto Doctor logo">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#e6b01e" />
+      <stop offset="45%" stop-color="#2563eb" />
+      <stop offset="75%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="none" />
+  <g font-family="Inter, system-ui, -apple-system, Arial, sans-serif" font-weight="800">
+    <text x="50%" y="56" text-anchor="middle" font-size="56" fill="url(#brandGrad)">AUTO DOCTOR</text>
+    <text x="50%" y="120" text-anchor="middle" font-size="20" fill="#0f172a">t/a MMAD — Your Car's Health, Our Priority</text>
+  </g>
+</svg>

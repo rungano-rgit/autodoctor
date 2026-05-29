@@ -17,8 +17,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav className="sticky top-0 z-50 bg-[#0b2545] text-slate-100 shadow-xl border-b border-blue-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center h-16">
-                <Link href="/" className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-amber-400 via-sky-500 via-cyan-400 to-violet-600 bg-clip-text text-transparent">
-                  Auto Doctor
+                <Link href="/" className="flex items-center gap-3">
+                  <img src="/logo.svg" alt="Auto Doctor" className="brand-logo h-10 md:h-12" />
+                  <span className="sr-only">Auto Doctor</span>
                 </Link>
                 <div className="hidden md:flex items-center gap-4">
                   <Link href="/" className="inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-semibold text-slate-100 hover:text-cyan-200 hover:bg-slate-900/40 transition duration-200"><FaHome /> Home</Link>
