@@ -13,19 +13,17 @@ export async function sendEmail(formData: FormData) {
 
   let attachmentBuffer: Buffer | null = null
   let attachmentName = ''
-  let attachmentType = ''
 
-  if (file && file.size > 0 && file.size <= 10 * 1024 * 1024) { // 10MB limit
+  if (file && file.size > 0 && file.size <= 10 * 1024 * 1024) {
     const bytes = await file.arrayBuffer()
     attachmentBuffer = Buffer.from(bytes)
     attachmentName = file.name
-    attachmentType = file.type
   }
 
   const htmlContent = `
     <h2>New Auto Doctor Inquiry</h2>
     <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Customer Email:</strong> ${email}</p>
     <p><strong>Car Model:</strong> ${carModel || 'Not provided'}</p>
     <p><strong>Problem Description:</strong></p>
     <p>${problem.replace(/\n/g, '<br>')}</p>
@@ -34,8 +32,8 @@ export async function sendEmail(formData: FormData) {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Auto Doctor Contact <onboarding@resend.dev>', // Change to your verified domain later
-      to: [process.env.CONTACT_EMAIL || 'info@autodoctor.co.zw'],
+      from: 'Auto Doctor Contact <onboarding@resend.dev>',
+      to: [process.env.CONTACT_EMAIL || 'vakaijmazenge@gmail.com'],
       replyTo: email || undefined,
       subject: `Auto Doctor Inquiry from ${name}`,
       html: htmlContent,
@@ -43,14 +41,13 @@ export async function sendEmail(formData: FormData) {
         {
           filename: attachmentName,
           content: attachmentBuffer.toString('base64'),
-          contentType: attachmentType,
         }
       ] : undefined,
     })
 
     if (error) {
       console.error('Resend error:', error)
-      return { success: false, message: 'Failed to send email. Please try WhatsApp instead.' }
+      return { success: false, message: 'Failed to send email. Please try WhatsApp.' }
     }
 
     return { success: true, message: 'Your inquiry has been sent. We will get back to you soon.' }
