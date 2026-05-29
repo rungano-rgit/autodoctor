@@ -4,11 +4,11 @@
 
 /* Brand color variables */
 :root{
-  --navy: #0b2545;
-  --gold: #e6b01e;
-  --royal: #4169e1;
-  --purple: #7c3aed;
-  --cyan: #06b6d4;
+  --brand-navy: #0b2545;
+  --brand-gold: #e6b01e;
+  --brand-blue: #2563eb;
+  --brand-cyan: #06b6d4;
+  --brand-purple: #7c3aed;
 }
 
 @layer base {
@@ -71,4 +71,11 @@
 
 .hero-cta .fa, .hero-cta svg {
   margin-right: 0.5rem;
+}
+
+/* Card border helper to avoid thin odd border artifacts */
+.card-border{
+  border: 1px solid rgba(11,37,69,0.06);
+  box-shadow: 0 8px 30px rgba(11,37,69,0.03);
+  background-clip: padding-box;
 }

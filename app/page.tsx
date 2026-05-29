@@ -47,23 +47,23 @@ export default async function Home() {
   <div className="max-w-7xl mx-auto">
     <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Our Main Services</h2>
     <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Professional diagnostics, repairs, and maintenance for all makes and models</p>
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
       {services?.map((service) => (
-        <div key={service.id} className="group bg-white rounded-[28px] shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border border-slate-200 min-h-[280px]">
-          <div className="h-2 w-full bg-gradient-to-r from-sky-500 to-cyan-500"></div>
+        <div key={service.id} className="group bg-white rounded-[28px] hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden card-border min-h-[280px]">
+          <div className="h-2 w-full" style={{ background: 'linear-gradient(90deg, var(--brand-gold), var(--brand-blue), var(--brand-cyan), var(--brand-purple))' }} />
           <div className="p-6 flex flex-col h-full">
             <div className="mb-4">{iconMap[service.icon as keyof typeof iconMap] || iconMap.default}</div>
             <div className="flex-1">
               <h3 className="text-xl font-semibold mb-3">{service.name}</h3>
               <p className="text-slate-600 leading-relaxed">{service.description?.substring(0, 110)}...</p>
             </div>
-            <Link href={`/services/${service.slug}`} className="inline-flex items-center gap-2 mt-6 text-sky-600 font-semibold group-hover:text-sky-700 transition">
+            <Link href={`/services/${service.slug}`} className="inline-flex items-center gap-2 mt-6 text-[var(--brand-blue)] font-semibold hover:text-[var(--brand-cyan)] transition">
               Learn more →
             </Link>
           </div>
         </div>
       ))}
-    </div>
+      </div>
   </div>
 </section>
 
